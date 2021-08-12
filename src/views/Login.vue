@@ -61,7 +61,8 @@ import 'firebase/firestore'
                 firebase.auth().signInWithEmailAndPassword(this.email, this.password)
                 .then((response) => {
                   console.log('Inicio de sesion correcto' + response.email)
-                  alert("Inicio de Sesion exitoso")
+                  alert("Inicio de Sesion exitoso"); 
+                  this.$router.push({name:'Gastos'})
                 })
                 .catch((error) => {
                   var errorCode = error.code;
