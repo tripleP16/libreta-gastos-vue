@@ -27,6 +27,7 @@
     </div>
 </template>
 <script>
+// USUARIO: perez@mail.com CONTRASEÑA: 12345678
 import firebase from 'firebase'
 import 'firebase/firestore'
 import db from '../firestore'
