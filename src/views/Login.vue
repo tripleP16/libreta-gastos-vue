@@ -29,6 +29,7 @@
 <script>
 import firebase from 'firebase'
 import 'firebase/firestore'
+import db from '../firestore'
     export default {
         name:"Login", 
         data:function(){
@@ -41,19 +42,8 @@ import 'firebase/firestore'
             }
         },
         beforeMount:function(){
-            var firebaseConfig = {
-                apiKey: "AIzaSyCYQSXAPB0hMspgH2HP4UnUlbY-cpbXLYw",
-                authDomain: "lista-de-gastos-81896.firebaseapp.com",
-                projectId: "lista-de-gastos-81896",
-                storageBucket: "lista-de-gastos-81896.appspot.com",
-                messagingSenderId: "1092787181785",
-                appId: "1:1092787181785:web:aab1706aa90821420286c8"
-            };
-             // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-            this.db = firebase.firestore();
-            const settings = {timestampsInSnapshots: true};
-            this.db.settings(settings);
+            
+            this.db = db;
         },
         methods:{
             iniciarSesion: function(){
