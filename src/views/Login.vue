@@ -62,7 +62,7 @@ import 'firebase/firestore'
                 .then((response) => {
                   console.log('Inicio de sesion correcto' + response.email)
                   alert("Inicio de Sesion exitoso"); 
-                  this.$router.push({name:'Gastos'})
+                  this.$router.push({name:'Gastos', params:{id:this.email} })
                 })
                 .catch((error) => {
                   var errorCode = error.code;
