@@ -30,10 +30,10 @@
         <div class="row">
             <div class="col s12">
                 <ul class="tabs ">
-                    <li class="tab col s3"><a href="#">Hogar</a></li>
-                    <li class="tab col s3"><a href="#">Trabajo</a></li>
-                    <li class="tab col s3"><a href="#">Carro</a></li>
-                    <li class="tab col s3"><a href="#" class="active">Todos</a></li>
+                    <li class="tab col s3"><a href="#" id="hogar" @click="filtro($event)">Hogar</a></li>
+                    <li class="tab col s3"><a href="#" id="trabajo" @click="filtro($event)">Trabajo</a></li>
+                    <li class="tab col s3"><a href="#" id="carro"  @click="filtro($event)">Carro</a></li>
+                    <li class="tab col s3"><a href="#" class="active"  @click="filtro($event)">Todos</a></li>
                 </ul>
             </div>
         </div>
@@ -203,6 +203,54 @@ import db from '../firestore'
                 .catch((error) => {
                     console.error("Error writing document: ", error);
                 });
+            }, 
+            filtro: async function($event){
+                if($event.target.id == 'hogar'){
+                    this.gastos = [];
+                const docR = this.db.collection('gastos').where("usuarioGasto","==", this.$route.params.id).where("categoriaGasto", "==", "Hogar");
+                await docR.get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                let aux ={
+                                    nombre: doc.data().nombreGastos,
+                                    monto:doc.data().montoGasto,
+                                    categoria:doc.data().categoriaGasto,
+                                }
+                                this.gastos.push(aux)
+                                console.log(doc.data())
+                            });
+                            
+                })
+                }else if ($event.target.id == 'trabajo'){
+                      this.gastos = [];
+                const docR = this.db.collection('gastos').where("usuarioGasto","==", this.$route.params.id).where("categoriaGasto", "==", "Trabajo");
+                await docR.get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                let aux ={
+                                    nombre: doc.data().nombreGastos,
+                                    monto:doc.data().montoGasto,
+                                    categoria:doc.data().categoriaGasto,
+                                }
+                                this.gastos.push(aux)
+                                console.log(doc.data())
+                            })
+                     });
+                }else if ($event.target.id == 'carro'){
+                     this.gastos = [];
+                const docR = this.db.collection('gastos').where("usuarioGasto","==", this.$route.params.id).where("categoriaGasto", "==", "Carro");
+                await docR.get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                let aux ={
+                                    nombre: doc.data().nombreGastos,
+                                    monto:doc.data().montoGasto,
+                                    categoria:doc.data().categoriaGasto,
+                                }
+                                this.gastos.push(aux)
+                                console.log(doc.data())
+                            })
+                     });
+                }else{
+                    this.cargarGastos()
+                }
             }
         }
     }
